@@ -153,7 +153,16 @@ def initialize_assignments(
 
 
 def get_or_create_assignments(family: Dict) -> Dict[str, str]:
-    """Get assignments from database or create new ones for a specific family"""
+    """Get assignments from database or create new ones for a specific family.
+
+    This function is idempotent - it will:
+    - Return existing assignments if they exist (preserves previous assignments)
+    - Create new assignments only if none exist for this family
+
+    This ensures that:
+    - Existing groups keep their assignments unchanged
+    - New groups added to config get assignments automatically
+    """
     family_id = family["id"]
     log_timing(f"Getting or creating assignments for family: {family_id}")
     db = get_db()
@@ -164,6 +173,7 @@ def get_or_create_assignments(family: Dict) -> Dict[str, str]:
 
     if existing:
         # Convert list of records to dictionary
+        # IMPORTANT: Existing assignments are NEVER modified
         log_timing(f"Found existing assignments - {len(existing)} records")
         return {record["giver"]: record["receiver"] for record in existing}
 
@@ -229,6 +239,59 @@ def get_user_info(username: str, family: Dict) -> Optional[Dict]:
     return None
 
 
+def initialize_all_families(config: Dict):
+    """Initialize assignments for all families in the config at startup.
+
+    This function:
+    - Creates assignments for new families
+    - Preserves assignments for existing families
+    - Removes families from database that are no longer in config
+    """
+    log_timing("Checking all families for assignment initialization")
+
+    db = get_db()
+
+    # Get list of family IDs from config
+    config_family_ids = {family["id"] for family in config.get("families", [])}
+
+    # Get list of all assignment tables in database
+    all_tables = db.tables()
+    assignment_tables = [t for t in all_tables if t.startswith("assignments_")]
+
+    # Extract family IDs from table names
+    db_family_ids = {t.replace("assignments_", "") for t in assignment_tables}
+
+    # Find families to remove (in DB but not in config)
+    families_to_remove = db_family_ids - config_family_ids
+
+    # Remove families that are no longer in config
+    for family_id in families_to_remove:
+        try:
+            db.drop_table(f"assignments_{family_id}")
+            log_timing(
+                f"Removed family '{family_id}' from database (no longer in config)"
+            )
+        except Exception as e:
+            print(f"ERROR: Could not remove family '{family_id}': {e}")
+
+    # Initialize assignments for all families in config
+    for family in config.get("families", []):
+        family_id = family["id"]
+        try:
+            # This will create assignments if they don't exist, or return existing ones
+            assignments = get_or_create_assignments(family)
+            log_timing(
+                f"Family '{family['name']}' ({family_id}): {len(assignments)} assignments ready"
+            )
+        except Exception as e:
+            # Log error but continue with other families
+            print(
+                f"ERROR: Could not initialize family '{family['name']}' ({family_id}): {e}"
+            )
+
+    log_timing("Family initialization complete")
+
+
 # Initialize session state
 log_timing("Initializing session state")
 if "authenticated" not in st.session_state:
@@ -244,6 +307,9 @@ log_timing("Session state initialized")
 # Load configuration
 log_timing("Starting configuration load")
 config = load_config()
+
+# Initialize assignments for all families (create for new families, preserve existing)
+initialize_all_families(config)
 
 # Main app
 log_timing("Starting UI rendering")
@@ -340,17 +406,11 @@ else:
     # Use translated title
     st.title(get_text(lang, "title"))
 
-    # Initialize assignments for this family
+    # Get assignments for this family (already initialized at startup)
     try:
         assignments = get_or_create_assignments(current_family)
-
-        # Debug: Print assignments to terminal
-        print(f"DEBUG - Secret Santa Assignments for {current_family['name']}:")
-        for giver, receiver in assignments.items():
-            print(f"  {giver} -> {receiver}")
-        print("-" * 40)
     except Exception as e:
-        st.error(f"Error initializing assignments: {e}")
+        st.error(f"Error loading assignments: {e}")
         st.stop()
 
     # Sidebar

@@ -180,7 +180,7 @@ secret-santa/
 
 1. **Initial Setup**: 
    - Configure groups (families or friend groups) in `.appconfig.yaml` with:
-     - Group ID, name, and budget
+     - Group ID, name, budget, and currency
      - Participants with usernames, passwords, and names
      - Exclusion rules (who cannot be assigned to whom)
    - On first run, the app automatically generates Secret Santa assignments per group
@@ -192,7 +192,7 @@ secret-santa/
 4. **Login**: Enter your username and password
 
 5. **View Assignment**: After login, users see:
-   - The gift budget for their group
+   - The gift budget for their group (in the configured currency)
    - Who they are Secret Santa for
    - Their recipient's wish list (if any)
    - Language switcher in the sidebar
@@ -202,7 +202,16 @@ secret-santa/
    - Remove items from their wish list
    - View what their Secret Santa will see
 
-7. **Persistence**: Assignments and wish lists are stored in `secret_santa.db` and persist across app restarts
+7. **Persistence**: Assignments and wish lists are stored in `data/secret_santa.db` and persist across app restarts
+
+8. **Managing Groups**: 
+   - **Adding New Groups**: You can add new families/groups to `.appconfig.yaml` at any time
+     - The app will automatically generate assignments for new groups on next startup
+   - **Removing Groups**: If you remove a group from `.appconfig.yaml`
+     - The group's assignments are automatically deleted from the database on next startup
+     - This keeps the database clean and in sync with your configuration
+   - **Important**: Existing group assignments are NEVER modified - they remain unchanged
+   - To reset assignments for an existing group, delete the database file or remove and re-add the group
 
 ## Configuration
 
