@@ -1,0 +1,139 @@
+# Translations for Secret Santa Application
+# All text strings used in the user interface
+# Structure: Each key has translations for en (English), de (German), and it (Italian)
+
+translations:
+  title:
+    en: "🎅 Secret Santa"
+    de: "🎅 Wichteln"
+    it: "🎅 Babbo Natale Segreto"
+  
+  select_family:
+    en: "Select your family/friends:"
+    de: "Wähle deine Familie/Freunde:"
+    it: "Seleziona la tua famiglia/amici:"
+
+  select_language:
+    en: "Language:"
+    de: "Sprache:"
+    it: "Lingua:"
+  
+  login_prompt:
+    en: "Please select your family/friends and log in to see your Secret Santa assignment"
+    de: "Bitte wähle deine Familie/Freunde und melde dich an, um deine Wichtel-Zuteilung zu sehen"
+    it: "Seleziona la tua famiglia/amici e accedi per vedere la tua assegnazione di Babbo Natale Segreto"
+  
+  username:
+    en: "Username"
+    de: "Benutzername"
+    it: "Nome utente"
+  
+  password:
+    en: "Password"
+    de: "Passwort"
+    it: "Password"
+  
+  login_button:
+    en: "Login"
+    de: "Anmelden"
+    it: "Accedi"
+  
+  invalid_credentials:
+    en: "Invalid username or password for this group"
+    de: "Ungültiger Benutzername oder Passwort für diese Gruppe"
+    it: "Nome utente o password non validi per questo gruppo"
+  
+  login_info:
+    en: "ℹ️ Login Information"
+    de: "ℹ️ Anmeldeinformationen"
+    it: "ℹ️ Informazioni di accesso"
+  
+  available_accounts:
+    en: "Available accounts for"
+    de: "Verfügbare Konten für"
+    it: "Account disponibili per"
+  
+  welcome:
+    en: "Welcome"
+    de: "Willkommen"
+    it: "Benvenuto"
+  
+  family:
+    en: "Family/Friends"
+    de: "Familie/Freunde"
+    it: "Famiglia/Amici"
+  
+  language:
+    en: "Language"
+    de: "Sprache"
+    it: "Lingua"
+  
+  logout:
+    en: "Logout"
+    de: "Abmelden"
+    it: "Esci"
+  
+  gift_budget:
+    en: "💰 Gift Budget"
+    de: "💰 Geschenkbudget"
+    it: "💰 Budget regalo"
+  
+  you_are_santa_for:
+    en: "🎁 You are Secret Santa for:"
+    de: "🎁 Du bist Wichtel für:"
+    it: "🎁 Sei Babbo Natale Segreto per:"
+  
+  keep_secret:
+    en: "Remember to keep it secret! 🤫"
+    de: "Vergiss nicht, es geheim zu halten! 🤫"
+    it: "Ricorda di mantenerlo segreto! 🤫"
+  
+  wish_list:
+    en: "📝 Wish list of"
+    de: "📝 Wunschliste von"
+    it: "📝 Lista dei desideri di"
+  
+  no_wishes_yet:
+    en: "hasn't added any wishes yet"
+    de: "hat noch keine Wünsche hinzugefügt"
+    it: "non ha ancora aggiunto desideri"
+  
+  your_wish_list:
+    en: "🎁 Your Wish List"
+    de: "🎁 Deine Wunschliste"
+    it: "🎁 La tua lista dei desideri"
+  
+  wish_list_info:
+    en: "Add items you'd like to receive (your Secret Santa will see this)"
+    de: "Füge Artikel hinzu, die du gerne erhalten möchtest (dein Wichtel wird das sehen)"
+    it: "Aggiungi articoli che vorresti ricevere (il tuo Babbo Natale Segreto li vedrà)"
+  
+  current_wishes:
+    en: "Current wishes:"
+    de: "Aktuelle Wünsche:"
+    it: "Desideri attuali:"
+  
+  remove:
+    en: "Remove"
+    de: "Entfernen"
+    it: "Rimuovi"
+  
+  add_new_wish:
+    en: "Add a new wish (you can include a link to Amazon, online shop, etc.):"
+    de: "Neuen Wunsch hinzufügen (du kannst auch einen Link zu Amazon, Online-Shop usw. hinzufügen):"
+    it: "Aggiungi un nuovo desiderio (puoi includere un link ad Amazon, negozio online, ecc.):"
+  
+  add_wish_button:
+    en: "Add Wish"
+    de: "Wunsch hinzufügen"
+    it: "Aggiungi desiderio"
+  
+  wish_added:
+    en: "Wish added!"
+    de: "Wunsch hinzugefügt!"
+    it: "Desiderio aggiunto!"
+  
+  assignment_error:
+    en: "Could not find your assignment. Please contact the administrator."
+    de: "Deine Zuteilung konnte nicht gefunden werden. Bitte kontaktiere den Administrator."
+    it: "Impossibile trovare la tua assegnazione. Contatta l'amministratore."
