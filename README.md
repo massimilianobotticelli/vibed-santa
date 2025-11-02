@@ -81,12 +81,39 @@ A multilingual web application for organizing Secret Santa gift exchanges with m
 
 #### Using Docker Compose (Recommended)
 
-1. **Build and run the container**
+1. **Create your configuration file**
+   ```bash
+   cp .appconfig.template.yaml .appconfig.yaml
+   # Edit .appconfig.yaml with your groups and participants
+   ```
+
+2. **Build and run the container**
    ```bash
    docker-compose up -d
    ```
+   
+   The configuration files are mounted as volumes, so you can edit them without rebuilding:
+   - `.appconfig.yaml` - Edit groups and participants
+   - `translations.yaml` - Edit translations (optional)
+   - `secret_santa.db` - Database persists between restarts
 
-2. **Stop the container**
+3. **Edit configuration while running**
+   
+   You can modify `.appconfig.yaml` on your host machine at any time. The app will use the updated configuration on the next page refresh or restart:
+   ```bash
+   # Edit the config file
+   nano .appconfig.yaml
+   
+   # Restart the container to apply changes
+   docker-compose restart
+   ```
+
+4. **View logs**
+   ```bash
+   docker-compose logs -f
+   ```
+
+5. **Stop the container**
    ```bash
    docker-compose down
    ```
@@ -98,10 +125,16 @@ A multilingual web application for organizing Secret Santa gift exchanges with m
    docker build -t secret-santa .
    ```
 
-2. **Run the container**
+2. **Run the container with mounted config**
    ```bash
-   docker run -p 8501:8501 secret-santa
+   docker run -p 8501:8501 \
+     -v $(pwd)/.appconfig.yaml:/app/.appconfig.yaml \
+     -v $(pwd)/secret_santa.db:/app/secret_santa.db \
+     -v $(pwd)/translations.yaml:/app/translations.yaml \
+     secret-santa
    ```
+   
+   The `-v` flags mount local files into the container so you can edit them without rebuilding.
 
 3. **Access the application**
    Open `http://localhost:8501` in your browser

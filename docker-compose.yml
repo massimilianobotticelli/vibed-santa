@@ -8,6 +8,13 @@ services:
     container_name: secret-santa-app
     ports:
       - "8501:8501"
+    volumes:
+      # Mount config file so it can be edited without rebuilding
+      - ./.appconfig.yaml:/app/.appconfig.yaml
+      # Mount database to persist assignments and wish lists
+      - ./secret_santa.db:/app/secret_santa.db
+      # Optional: Mount translations if you want to edit them
+      - ./translations.yaml:/app/translations.yaml
     environment:
       - STREAMLIT_SERVER_PORT=8501
       - STREAMLIT_SERVER_ADDRESS=0.0.0.0

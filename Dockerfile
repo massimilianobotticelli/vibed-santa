@@ -38,6 +38,19 @@ RUN poetry install --no-root --only main
 
 # Copy application code
 COPY app.py .
+COPY translations.yaml .
+
+# Copy configuration file if it exists, otherwise use template
+# The actual config should be mounted as a volume in production
+COPY .appconfig.yaml* ./
+RUN if [ ! -f .appconfig.yaml ]; then \
+    if [ -f .appconfig.template.yaml ]; then \
+        cp .appconfig.template.yaml .appconfig.yaml; \
+    fi; \
+    fi
+
+# Create a volume mount point for the database to persist data
+VOLUME ["/app/secret_santa.db"]
 
 # Expose Streamlit's default port
 EXPOSE 8501
