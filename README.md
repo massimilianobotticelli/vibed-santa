@@ -95,7 +95,7 @@ A multilingual web application for organizing Secret Santa gift exchanges with m
    The configuration files are mounted as volumes, so you can edit them without rebuilding:
    - `.appconfig.yaml` - Edit groups and participants
    - `translations.yaml` - Edit translations (optional)
-   - `secret_santa.db` - Database persists between restarts
+   - `data/` - Directory containing `secret_santa.db` (persists between restarts)
 
 3. **Edit configuration while running**
    
@@ -129,12 +129,15 @@ A multilingual web application for organizing Secret Santa gift exchanges with m
    ```bash
    docker run -p 8501:8501 \
      -v $(pwd)/.appconfig.yaml:/app/.appconfig.yaml \
-     -v $(pwd)/secret_santa.db:/app/secret_santa.db \
+     -v $(pwd)/data:/app/data \
      -v $(pwd)/translations.yaml:/app/translations.yaml \
      secret-santa
    ```
    
-   The `-v` flags mount local files into the container so you can edit them without rebuilding.
+   The `-v` flags mount local files/directories into the container:
+   - `.appconfig.yaml` - Configuration file (editable)
+   - `data/` - Directory for database persistence
+   - `translations.yaml` - Translations (editable)
 
 3. **Access the application**
    Open `http://localhost:8501` in your browser

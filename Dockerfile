@@ -49,8 +49,8 @@ RUN if [ ! -f .appconfig.yaml ]; then \
     fi; \
     fi
 
-# Create a volume mount point for the database to persist data
-VOLUME ["/app/secret_santa.db"]
+# Create data directory for database storage
+RUN mkdir -p /app/data
 
 # Expose Streamlit's default port
 EXPOSE 8501

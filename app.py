@@ -20,7 +20,10 @@ log_timing("Starting Secret Santa app - imports loaded")
 
 # Configuration
 CONFIG_FILE = Path(".appconfig.yaml")
-DB_FILE = Path("secret_santa.db")
+# Create data directory if it doesn't exist (for Docker volume mounting)
+DATA_DIR = Path("data")
+DATA_DIR.mkdir(exist_ok=True)
+DB_FILE = DATA_DIR / "secret_santa.db"
 TRANSLATIONS_FILE = Path("translations.yaml")
 
 log_timing("Configuration constants defined")
