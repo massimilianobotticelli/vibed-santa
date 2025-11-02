@@ -1,0 +1,72 @@
+# Secret Santa Configuration Template
+# Copy this file to .appconfig.yaml and modify it with your actual participant information
+# This file contains participant information for the Secret Santa application
+
+# Budget for gifts (in your preferred currency)
+# Set this to the agreed-upon gift budget for your group
+budget: 50
+
+# Participants with their login credentials
+# Each participant needs:
+# - username: unique login identifier (no spaces, lowercase recommended)
+# - password: secure password for login (use strong passwords in production)
+# - name: display name for the participant
+# - exclude: list of usernames this person should NOT be assigned to give gifts to
+#   Common exclusions: spouses, siblings, close family members, or recent past assignments
+
+participants:
+  # Example participant 1
+  - username: user1
+    password: change_me_123
+    name: "First Person"
+    exclude: [user2]  # Cannot give to user2 (e.g., spouse)
+
+  # Example participant 2
+  - username: user2
+    password: change_me_456
+    name: "Second Person"
+    exclude: [user1]  # Cannot give to user1 (e.g., spouse)
+  
+  # Example participant 3
+  - username: user3
+    password: change_me_789
+    name: "Third Person"
+    exclude: [user4, user5]  # Cannot give to user4 or user5 (e.g., children)
+  
+  # Example participant 4
+  - username: user4
+    password: change_me_abc
+    name: "Fourth Person"
+    exclude: [user3]  # Cannot give to user3 (e.g., parent)
+
+  # Example participant 5
+  - username: user5
+    password: change_me_def
+    name: "Fifth Person"
+    exclude: [user3, user6]  # Cannot give to user3 (parent) or user6 (sibling)
+
+  # Example participant 6
+  - username: user6
+    password: change_me_ghi
+    name: "Sixth Person"
+    exclude: [user5, user7]  # Cannot give to user5 (sibling) or user7 (partner)
+
+  # Example participant 7
+  - username: user7
+    password: change_me_jkl
+    name: "Seventh Person"
+    exclude: [user6]  # Cannot give to user6 (partner)
+
+  # Example participant 8
+  - username: user8
+    password: change_me_mno
+    name: "Eighth Person"
+    exclude: []  # Can give to anyone
+
+# Configuration Notes:
+# 1. Copy this file to .appconfig.yaml before use
+# 2. Replace all example usernames, passwords, and names with real data
+# 3. Use strong passwords for security
+# 4. Ensure usernames in exclude lists match exactly with actual usernames
+# 5. You can add or remove participants as needed
+# 6. The exclude list helps prevent awkward gift exchanges (spouses, siblings, etc.)
