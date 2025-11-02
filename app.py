@@ -58,9 +58,18 @@ log_timing("Streamlit page config complete")
 
 
 # Load configuration
-@st.cache_data
-def load_config() -> Dict:
-    """Load configuration from YAML file"""
+def get_config_mtime():
+    """Get modification time of config file for cache invalidation"""
+    return CONFIG_FILE.stat().st_mtime if CONFIG_FILE.exists() else 0
+
+
+@st.cache_data(ttl=60)  # Cache for 60 seconds, then reload to pick up config changes
+def load_config(_mtime: float) -> Dict:
+    """Load configuration from YAML file
+
+    Args:
+        _mtime: Modification time of config file (prefixed with _ to exclude from hash)
+    """
     log_timing("Loading configuration file")
     if not CONFIG_FILE.exists():
         st.error(f"Configuration file '{CONFIG_FILE}' not found!")
@@ -247,12 +256,10 @@ def initialize_all_families(config: Dict):
     - Preserves assignments for existing families
     - Removes families from database that are no longer in config
     """
-    log_timing("Checking all families for assignment initialization")
-
-    db = get_db()
-
     # Get list of family IDs from config
     config_family_ids = {family["id"] for family in config.get("families", [])}
+
+    db = get_db()
 
     # Get list of all assignment tables in database
     all_tables = db.tables()
@@ -265,16 +272,22 @@ def initialize_all_families(config: Dict):
     families_to_remove = db_family_ids - config_family_ids
 
     # Remove families that are no longer in config
-    for family_id in families_to_remove:
-        try:
-            db.drop_table(f"assignments_{family_id}")
-            log_timing(
-                f"Removed family '{family_id}' from database (no longer in config)"
-            )
-        except Exception as e:
-            print(f"ERROR: Could not remove family '{family_id}': {e}")
+    if families_to_remove:
+        log_timing(f"Found {len(families_to_remove)} families to remove from database")
+        for family_id in families_to_remove:
+            try:
+                db.drop_table(f"assignments_{family_id}")
+                log_timing(
+                    f"Removed family '{family_id}' from database (no longer in config)"
+                )
+            except Exception as e:
+                print(f"ERROR: Could not remove family '{family_id}': {e}")
+
+    # Close the database connection to ensure changes are persisted
+    db.close()
 
     # Initialize assignments for all families in config
+    log_timing(f"Initializing {len(config_family_ids)} families from config")
     for family in config.get("families", []):
         family_id = family["id"]
         try:
@@ -306,7 +319,7 @@ log_timing("Session state initialized")
 
 # Load configuration
 log_timing("Starting configuration load")
-config = load_config()
+config = load_config(get_config_mtime())
 
 # Initialize assignments for all families (create for new families, preserve existing)
 initialize_all_families(config)

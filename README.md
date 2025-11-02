@@ -206,9 +206,10 @@ secret-santa/
 
 8. **Managing Groups**: 
    - **Adding New Groups**: You can add new families/groups to `.appconfig.yaml` at any time
-     - The app will automatically generate assignments for new groups on next startup
+     - The app will automatically detect and generate assignments for new groups
+     - Configuration is reloaded automatically (within 60 seconds or on page refresh)
    - **Removing Groups**: If you remove a group from `.appconfig.yaml`
-     - The group's assignments are automatically deleted from the database on next startup
+     - The group's assignments are automatically deleted from the database
      - This keeps the database clean and in sync with your configuration
    - **Important**: Existing group assignments are NEVER modified - they remain unchanged
    - To reset assignments for an existing group, delete the database file or remove and re-add the group
