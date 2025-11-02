@@ -1,72 +1,111 @@
 # Secret Santa Configuration Template
-# Copy this file to .appconfig.yaml and modify it with your actual participant information
-# This file contains participant information for the Secret Santa application
+# Copy this file to .appconfig.yaml and modify it with your actual groups and participants
+# This file supports multiple families or friend groups with independent Secret Santa assignments
 
-# Budget for gifts (in your preferred currency)
-# Set this to the agreed-upon gift budget for your group
-budget: 50
+# Family/Group configurations
+# You can define multiple groups (families, friend groups, office teams, etc.)
+# Each group has its own:
+# - Unique ID (used internally)
+# - Display name (shown to users)
+# - Budget (gift spending limit)
+# - Participants (with usernames, passwords, names, and exclusions)
 
-# Participants with their login credentials
-# Each participant needs:
-# - username: unique login identifier (no spaces, lowercase recommended)
-# - password: secure password for login (use strong passwords in production)
-# - name: display name for the participant
-# - exclude: list of usernames this person should NOT be assigned to give gifts to
-#   Common exclusions: spouses, siblings, close family members, or recent past assignments
+families:
+  # Example Group 1: A Family
+  - id: smith_family
+    name: Smith Family
+    budget: 50
+    participants:
+      # Each participant needs:
+      # - username: unique login identifier (no spaces, lowercase recommended)
+      # - password: secure password for login (use strong passwords in production!)
+      # - name: display name shown in the app
+      # - exclude: list of usernames this person should NOT be assigned to
+      #   Common exclusions: spouses, partners, siblings, or anyone living together
+      
+      - username: john_smith
+        password: change_me_123
+        name: John Smith
+        exclude: [mary_smith]  # Cannot give to spouse
+      
+      - username: mary_smith
+        password: change_me_456
+        name: Mary Smith
+        exclude: [john_smith]  # Cannot give to spouse
+      
+      - username: alice_smith
+        password: change_me_789
+        name: Alice Smith
+        exclude: []  # Can give to anyone
+      
+      - username: bob_smith
+        password: change_me_abc
+        name: Bob Smith
+        exclude: []  # Can give to anyone
 
-participants:
-  # Example participant 1
-  - username: user1
-    password: change_me_123
-    name: "First Person"
-    exclude: [user2]  # Cannot give to user2 (e.g., spouse)
+  # Example Group 2: A Friend Group
+  - id: college_friends
+    name: College Friends 2025
+    budget: 30
+    participants:
+      - username: alex_friend
+        password: change_me_def
+        name: Alex
+        exclude: [jordan_friend]  # Cannot give to partner
+      
+      - username: jordan_friend
+        password: change_me_ghi
+        name: Jordan
+        exclude: [alex_friend]  # Cannot give to partner
+      
+      - username: sam_friend
+        password: change_me_jkl
+        name: Sam
+        exclude: []
+      
+      - username: taylor_friend
+        password: change_me_mno
+        name: Taylor
+        exclude: []
+      
+      - username: morgan_friend
+        password: change_me_pqr
+        name: Morgan
+        exclude: []
 
-  # Example participant 2
-  - username: user2
-    password: change_me_456
-    name: "Second Person"
-    exclude: [user1]  # Cannot give to user1 (e.g., spouse)
-  
-  # Example participant 3
-  - username: user3
-    password: change_me_789
-    name: "Third Person"
-    exclude: [user4, user5]  # Cannot give to user4 or user5 (e.g., children)
-  
-  # Example participant 4
-  - username: user4
-    password: change_me_abc
-    name: "Fourth Person"
-    exclude: [user3]  # Cannot give to user3 (e.g., parent)
-
-  # Example participant 5
-  - username: user5
-    password: change_me_def
-    name: "Fifth Person"
-    exclude: [user3, user6]  # Cannot give to user3 (parent) or user6 (sibling)
-
-  # Example participant 6
-  - username: user6
-    password: change_me_ghi
-    name: "Sixth Person"
-    exclude: [user5, user7]  # Cannot give to user5 (sibling) or user7 (partner)
-
-  # Example participant 7
-  - username: user7
-    password: change_me_jkl
-    name: "Seventh Person"
-    exclude: [user6]  # Cannot give to user6 (partner)
-
-  # Example participant 8
-  - username: user8
-    password: change_me_mno
-    name: "Eighth Person"
-    exclude: []  # Can give to anyone
+  # Example Group 3: Office Team
+  - id: office_team
+    name: Marketing Team
+    budget: 25
+    participants:
+      - username: manager1
+        password: change_me_stu
+        name: Manager Name
+        exclude: []
+      
+      - username: employee1
+        password: change_me_vwx
+        name: Employee One
+        exclude: []
+      
+      - username: employee2
+        password: change_me_yz1
+        name: Employee Two
+        exclude: []
+      
+      - username: employee3
+        password: change_me_234
+        name: Employee Three
+        exclude: []
 
 # Configuration Notes:
-# 1. Copy this file to .appconfig.yaml before use
-# 2. Replace all example usernames, passwords, and names with real data
-# 3. Use strong passwords for security
-# 4. Ensure usernames in exclude lists match exactly with actual usernames
-# 5. You can add or remove participants as needed
-# 6. The exclude list helps prevent awkward gift exchanges (spouses, siblings, etc.)
+# 1. Copy this file to .appconfig.yaml before using the app
+# 2. Replace all example IDs, names, usernames, and passwords with real data
+# 3. Use STRONG passwords - these control access to Secret Santa assignments!
+# 4. Each group ID must be unique (e.g., smith_family, friends_2025, office_marketing)
+# 5. Usernames must be unique across ALL groups
+# 6. Ensure usernames in exclude lists match exactly with actual usernames
+# 7. You can add or remove groups and participants as needed
+# 8. The exclude list prevents awkward pairings (spouses, partners, siblings, roommates)
+# 9. Each group operates independently with its own Secret Santa assignments
+# 10. Language selection is done by users in the app interface (not configured here)
