@@ -1,4 +1,4 @@
-# Secret Santa Web Application
+# Secret Santa Web Application (Vibe Coded)
 
 A multilingual web application for organizing Secret Santa gift exchanges with multiple groups, login authentication, and persistent storage. Built with Streamlit.
 
@@ -335,3 +335,4 @@ MIT License - feel free to use this project for your Secret Santa events!
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
