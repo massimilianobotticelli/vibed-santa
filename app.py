@@ -320,7 +320,7 @@ if not st.session_state.authenticated:
         )
         for participant in selected_family["participants"]:
             st.write(
-                f"- **{participant['name']}** (username: `{participant['username']}`, password: `{participant['password']}`)"
+                f"- **{participant['name']}** (username: `{participant['username']}`)"
             )
 
 # Main application (after login)
@@ -402,7 +402,10 @@ else:
             st.rerun()
 
     # Display budget
-    st.info(f"{get_text(lang, 'gift_budget')}: **${current_family['budget']}**")
+    currency = current_family.get("currency", "$")  # Default to $ if not specified
+    st.info(
+        f"{get_text(lang, 'gift_budget')}: **{currency}{current_family['budget']}**"
+    )
 
     # Get receiver
     receiver_username = assignments.get(st.session_state.username)

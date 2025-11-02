@@ -8,6 +8,7 @@
 # - Unique ID (used internally)
 # - Display name (shown to users)
 # - Budget (gift spending limit)
+# - Currency (currency symbol for the budget)
 # - Participants (with usernames, passwords, names, and exclusions)
 
 families:
@@ -15,6 +16,7 @@ families:
   - id: smith_family
     name: Smith Family
     budget: 50
+    currency: "$"  # Currency symbol (e.g., $, €, £, ¥, etc.)
     participants:
       # Each participant needs:
       # - username: unique login identifier (no spaces, lowercase recommended)
@@ -47,6 +49,7 @@ families:
   - id: college_friends
     name: College Friends 2025
     budget: 30
+    currency: "€"  # Currency symbol (e.g., $, €, £, ¥, etc.)
     participants:
       - username: alex_friend
         password: change_me_def
@@ -77,6 +80,7 @@ families:
   - id: office_team
     name: Marketing Team
     budget: 25
+    currency: "£"  # Currency symbol (e.g., $, €, £, ¥, etc.)
     participants:
       - username: manager1
         password: change_me_stu

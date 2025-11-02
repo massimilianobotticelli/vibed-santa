@@ -48,6 +48,7 @@ A multilingual web application for organizing Secret Santa gift exchanges with m
      - id: my_family
        name: Smith Family
        budget: 50
+       currency: "$"  # Currency symbol
        participants:
          - username: alice
            password: secure123
@@ -211,7 +212,8 @@ secret-santa/
 families:
   - id: group_identifier          # Unique ID for the group
     name: Display Name            # Name shown in the UI
-    budget: 50                    # Gift budget
+    budget: 50                    # Gift budget amount
+    currency: "$"                 # Currency symbol ($, €, £, ¥, etc.)
     participants:
       - username: user1           # Login username
         password: pass1           # Login password
