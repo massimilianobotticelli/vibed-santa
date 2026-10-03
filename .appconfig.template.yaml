@@ -1,6 +1,9 @@
-# Secret Santa Configuration Template
-# Copy this file to .appconfig.yaml and modify it with your actual groups and participants
-# This file supports multiple families or friend groups with independent Secret Santa assignments
+# Secret Santa Configuration Template (optional)
+# Groups and people are managed by the admin in the app's admin console.
+# This file is only needed to import groups in bulk, or the configuration of an
+# older version of the app: copy it to data/appconfig.yaml before starting the app.
+# It is imported only into an empty database (no groups and no people yet) and
+# is then renamed to data/appconfig.yaml.imported.
 
 # Family/Group configurations
 # You can define multiple groups (families, friend groups, office teams, etc.)
@@ -103,14 +106,15 @@ families:
         exclude: []
 
 # Configuration Notes:
-# 1. Copy this file to .appconfig.yaml before using the app
+# 1. Copy this file to data/appconfig.yaml to import it on the next start
 # 2. Replace all example IDs, names, usernames, and passwords with real data
 # 3. Use STRONG passwords - these control access to Secret Santa assignments!
 # 4. Each group ID must be unique (e.g., smith_family, friends_2025, office_marketing)
 # 5. Usernames must be unique within a group. The same person can join several groups
 #    by using the same username in each; they get a separate wish list per group
-# 6. Ensure usernames in exclude lists match exactly with actual usernames
-# 7. You can add or remove groups and participants as needed
+# 6. Ensure usernames in exclude lists match exactly with actual usernames.
+#    Exclusions are imported per person and apply in all their groups
+# 7. After the import, add, edit or remove groups and people in the admin console
 # 8. The exclude list prevents awkward pairings (spouses, partners, siblings, roommates)
 # 9. Each group operates independently with its own Secret Santa assignments
 # 10. Language selection is done by users in the app interface (not configured here)

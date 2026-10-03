@@ -8,20 +8,15 @@ translations:
     de: "🎅 Wichteln"
     it: "🎅 Babbo Natale Segreto"
   
-  select_family:
-    en: "Select your family/friends:"
-    de: "Wähle deine Familie/Freunde:"
-    it: "Seleziona la tua famiglia/amici:"
-
   select_language:
     en: "Language:"
     de: "Sprache:"
     it: "Lingua:"
   
   login_prompt:
-    en: "Please select your family/friends and log in to see your Secret Santa assignment"
-    de: "Bitte wähle deine Familie/Freunde und melde dich an, um deine Wichtel-Zuteilung zu sehen"
-    it: "Seleziona la tua famiglia/amici e accedi per vedere la tua assegnazione di Babbo Natale Segreto"
+    en: "Log in to see your Secret Santa assignment"
+    de: "Melde dich an, um deine Wichtel-Zuteilung zu sehen"
+    it: "Accedi per vedere la tua assegnazione di Babbo Natale Segreto"
   
   username:
     en: "Username"
@@ -39,19 +34,9 @@ translations:
     it: "Accedi"
   
   invalid_credentials:
-    en: "Invalid username or password for this group"
-    de: "Ungültiger Benutzername oder Passwort für diese Gruppe"
-    it: "Nome utente o password non validi per questo gruppo"
-  
-  login_info:
-    en: "ℹ️ Login Information"
-    de: "ℹ️ Anmeldeinformationen"
-    it: "ℹ️ Informazioni di accesso"
-  
-  available_accounts:
-    en: "Available accounts for"
-    de: "Verfügbare Konten für"
-    it: "Account disponibili per"
+    en: "Invalid username or password"
+    de: "Ungültiger Benutzername oder Passwort"
+    it: "Nome utente o password non validi"
   
   welcome:
     en: "Welcome"
@@ -137,3 +122,387 @@ translations:
     en: "Could not find your assignment. Please contact the administrator."
     de: "Deine Zuteilung konnte nicht gefunden werden. Bitte kontaktiere den Administrator."
     it: "Impossibile trovare la tua assegnazione. Contatta l'amministratore."
+
+  draw_pending:
+    en: "The draw hasn't taken place yet. Come back later to find out who you are Secret Santa for — meanwhile, add your wishes below!"
+    de: "Die Auslosung hat noch nicht stattgefunden. Schau später wieder vorbei, um zu erfahren, wessen Wichtel du bist — füge in der Zwischenzeit unten deine Wünsche hinzu!"
+    it: "L'estrazione non è ancora avvenuta. Torna più tardi per scoprire per chi sei Babbo Natale Segreto — nel frattempo, aggiungi i tuoi desideri qui sotto!"
+
+  # Admin
+  admin_setup_title:
+    en: "🔐 Create the admin account"
+    de: "🔐 Admin-Konto erstellen"
+    it: "🔐 Crea l'account amministratore"
+
+  admin_setup_info:
+    en: "This is the first start of the app. Create the admin account: the admin runs the draw and can check its results if needed."
+    de: "Die App wird zum ersten Mal gestartet. Erstelle das Admin-Konto: Der Admin führt die Auslosung durch und kann bei Bedarf die Ergebnisse einsehen."
+    it: "Questo è il primo avvio dell'app. Crea l'account amministratore: l'amministratore esegue l'estrazione e può consultarne i risultati in caso di necessità."
+
+  confirm_password:
+    en: "Confirm password"
+    de: "Passwort bestätigen"
+    it: "Conferma password"
+
+  create_admin_button:
+    en: "Create admin account"
+    de: "Admin-Konto erstellen"
+    it: "Crea account amministratore"
+
+  fields_required:
+    en: "Please fill in all fields"
+    de: "Bitte alle Felder ausfüllen"
+    it: "Compila tutti i campi"
+
+  passwords_do_not_match:
+    en: "The passwords do not match"
+    de: "Die Passwörter stimmen nicht überein"
+    it: "Le password non coincidono"
+
+  participant_tab:
+    en: "🎁 Participant"
+    de: "🎁 Teilnehmer"
+    it: "🎁 Partecipante"
+
+  admin_tab:
+    en: "Admin"
+    de: "Admin"
+    it: "Amministratore"
+
+  invalid_admin_credentials:
+    en: "Invalid admin username or password"
+    de: "Ungültiger Admin-Benutzername oder ungültiges Passwort"
+    it: "Nome utente o password dell'amministratore non validi"
+
+  admin_console:
+    en: "🛠️ Admin console"
+    de: "🛠️ Admin-Konsole"
+    it: "🛠️ Console di amministrazione"
+
+  admin_console_info:
+    en: "Manage groups and people, share their logins, run the draw for each group and check who still has to add their wishes. The results stay hidden, so you can enjoy the surprise too."
+    de: "Verwalte Gruppen und Personen, teile ihre Zugangsdaten, führe die Auslosung für jede Gruppe durch und prüfe, wer seine Wünsche noch hinzufügen muss. Die Ergebnisse bleiben verborgen, damit auch du dich überraschen lassen kannst."
+    it: "Gestisci gruppi e persone, condividi i loro accessi, esegui l'estrazione per ogni gruppo e controlla chi deve ancora aggiungere i propri desideri. I risultati restano nascosti, così anche tu puoi goderti la sorpresa."
+
+  participants:
+    en: "participants"
+    de: "Teilnehmer"
+    it: "partecipanti"
+
+  draw_not_done:
+    en: "The draw has not been run yet."
+    de: "Die Auslosung wurde noch nicht durchgeführt."
+    it: "L'estrazione non è ancora stata eseguita."
+
+  run_draw:
+    en: "🎲 Run the draw"
+    de: "🎲 Auslosung durchführen"
+    it: "🎲 Esegui l'estrazione"
+
+  draw_success:
+    en: "Draw completed! The results stay hidden."
+    de: "Auslosung abgeschlossen! Die Ergebnisse bleiben verborgen."
+    it: "Estrazione completata! I risultati restano nascosti."
+
+  draw_failed:
+    en: "The draw failed:"
+    de: "Die Auslosung ist fehlgeschlagen:"
+    it: "L'estrazione non è riuscita:"
+
+  draw_done:
+    en: "Draw done on"
+    de: "Auslosung durchgeführt am"
+    it: "Estrazione eseguita il"
+
+  draw_date_unknown:
+    en: "Draw done (date unknown)"
+    de: "Auslosung durchgeführt (Datum unbekannt)"
+    it: "Estrazione eseguita (data sconosciuta)"
+
+  participants_changed:
+    en: "Participants were added or removed since the draw. Redo the draw so that everyone is included."
+    de: "Seit der Auslosung wurden Teilnehmer hinzugefügt oder entfernt. Wiederhole die Auslosung, damit alle dabei sind."
+    it: "Dopo l'estrazione sono stati aggiunti o rimossi dei partecipanti. Ripeti l'estrazione per includere tutti."
+
+  redo_draw:
+    en: "Redo the draw"
+    de: "Auslosung wiederholen"
+    it: "Ripeti l'estrazione"
+
+  redo_draw_warning:
+    en: "Everyone gets a new assignment: whoever has already seen theirs will have to check again."
+    de: "Alle bekommen eine neue Zuteilung: Wer seine schon gesehen hat, muss erneut nachsehen."
+    it: "Tutti riceveranno una nuova assegnazione: chi ha già visto la propria dovrà controllare di nuovo."
+
+  redo_draw_confirm:
+    en: "I understand, redo the draw"
+    de: "Verstanden, Auslosung wiederholen"
+    it: "Ho capito, ripeti l'estrazione"
+
+  wishes_progress:
+    en: "Wish lists added"
+    de: "Wunschlisten hinzugefügt"
+    it: "Liste dei desideri aggiunte"
+
+  missing_wishes:
+    en: "Still without wishes:"
+    de: "Noch ohne Wünsche:"
+    it: "Ancora senza desideri:"
+
+  all_wishes_added:
+    en: "Everyone has added their wishes 🎉"
+    de: "Alle haben ihre Wünsche hinzugefügt 🎉"
+    it: "Tutti hanno aggiunto i propri desideri 🎉"
+
+  show_results:
+    en: "👀 Show results (spoiler!)"
+    de: "👀 Ergebnisse anzeigen (Spoiler!)"
+    it: "👀 Mostra i risultati (spoiler!)"
+
+  giver:
+    en: "Secret Santa"
+    de: "Wichtel"
+    it: "Babbo Natale Segreto"
+
+  receiver:
+    en: "Gives a gift to"
+    de: "Beschenkt"
+    it: "Fa un regalo a"
+
+  # Admin: groups and people
+  section_draws:
+    en: "🎲 Draws"
+    de: "🎲 Auslosungen"
+    it: "🎲 Estrazioni"
+
+  section_groups:
+    en: "👨‍👩‍👧 Groups"
+    de: "👨‍👩‍👧 Gruppen"
+    it: "👨‍👩‍👧 Gruppi"
+
+  section_people:
+    en: "🧑 People"
+    de: "🧑 Personen"
+    it: "🧑 Persone"
+
+  no_groups_admin:
+    en: "There are no groups yet. Add people in the People section, then create a group in the Groups section."
+    de: "Es gibt noch keine Gruppen. Füge im Bereich Personen Leute hinzu und erstelle dann im Bereich Gruppen eine Gruppe."
+    it: "Non ci sono ancora gruppi. Aggiungi le persone nella sezione Persone, poi crea un gruppo nella sezione Gruppi."
+
+  no_people_yet:
+    en: "There are no people yet: add them in the People section to put them in a group."
+    de: "Es gibt noch keine Personen: Füge sie im Bereich Personen hinzu, um sie einer Gruppe zuzuordnen."
+    it: "Non ci sono ancora persone: aggiungile nella sezione Persone per inserirle in un gruppo."
+
+  create_group:
+    en: "➕ Create a group"
+    de: "➕ Gruppe erstellen"
+    it: "➕ Crea un gruppo"
+
+  group_name:
+    en: "Group name"
+    de: "Gruppenname"
+    it: "Nome del gruppo"
+
+  budget:
+    en: "Budget"
+    de: "Budget"
+    it: "Budget"
+
+  currency:
+    en: "Currency"
+    de: "Währung"
+    it: "Valuta"
+
+  members:
+    en: "Participants"
+    de: "Teilnehmer"
+    it: "Partecipanti"
+
+  save:
+    en: "Save"
+    de: "Speichern"
+    it: "Salva"
+
+  saved:
+    en: "Saved:"
+    de: "Gespeichert:"
+    it: "Salvato:"
+
+  group_created:
+    en: "Group created:"
+    de: "Gruppe erstellt:"
+    it: "Gruppo creato:"
+
+  delete_group:
+    en: "Delete group"
+    de: "Gruppe löschen"
+    it: "Elimina gruppo"
+
+  delete_group_warning:
+    en: "Deleting the group also deletes its draw and its wish lists. The people stay."
+    de: "Beim Löschen der Gruppe werden auch ihre Auslosung und ihre Wunschlisten gelöscht. Die Personen bleiben erhalten."
+    it: "Eliminando il gruppo vengono eliminate anche la sua estrazione e le sue liste dei desideri. Le persone restano."
+
+  confirm_delete:
+    en: "I understand, delete"
+    de: "Verstanden, löschen"
+    it: "Ho capito, elimina"
+
+  deleted:
+    en: "Deleted:"
+    de: "Gelöscht:"
+    it: "Eliminato:"
+
+  name_required:
+    en: "Please enter a name"
+    de: "Bitte einen Namen eingeben"
+    it: "Inserisci un nome"
+
+  add_person:
+    en: "➕ Add a person"
+    de: "➕ Person hinzufügen"
+    it: "➕ Aggiungi una persona"
+
+  name:
+    en: "Name"
+    de: "Name"
+    it: "Nome"
+
+  username_optional:
+    en: "Username (empty: created from the name)"
+    de: "Benutzername (leer: aus dem Namen erstellt)"
+    it: "Nome utente (vuoto: creato dal nome)"
+
+  password_optional:
+    en: "Password (empty: generated)"
+    de: "Passwort (leer: wird generiert)"
+    it: "Password (vuota: generata)"
+
+  exclusions:
+    en: "Doesn't exchange gifts with (e.g. partner)"
+    de: "Beschenkt sich nicht gegenseitig mit (z. B. Partner)"
+    it: "Non si scambia regali con (es. partner)"
+
+  groups:
+    en: "Groups"
+    de: "Gruppen"
+    it: "Gruppi"
+
+  no_group:
+    en: "no group"
+    de: "keine Gruppe"
+    it: "nessun gruppo"
+
+  person_added:
+    en: "Person added:"
+    de: "Person hinzugefügt:"
+    it: "Persona aggiunta:"
+
+  username_taken:
+    en: "This username already exists"
+    de: "Dieser Benutzername existiert bereits"
+    it: "Questo nome utente esiste già"
+
+  show_logins:
+    en: "🔑 Show all logins"
+    de: "🔑 Alle Zugangsdaten anzeigen"
+    it: "🔑 Mostra tutti gli accessi"
+
+  share_login:
+    en: "Login details to share with this person:"
+    de: "Zugangsdaten, die du mit dieser Person teilen kannst:"
+    it: "Dati di accesso da condividere con questa persona:"
+
+  new_password:
+    en: "🔄 Generate a new password"
+    de: "🔄 Neues Passwort generieren"
+    it: "🔄 Genera una nuova password"
+
+  password_generated:
+    en: "New password generated for"
+    de: "Neues Passwort generiert für"
+    it: "Nuova password generata per"
+
+  delete_person:
+    en: "Delete person"
+    de: "Person löschen"
+    it: "Elimina persona"
+
+  delete_person_warning:
+    en: "Deleting the person removes them from all groups and deletes their wish lists."
+    de: "Beim Löschen wird die Person aus allen Gruppen entfernt und ihre Wunschlisten werden gelöscht."
+    it: "Eliminando la persona, viene rimossa da tutti i gruppi e le sue liste dei desideri vengono eliminate."
+
+  # Admin: reset
+  section_reset:
+    en: "⚠️ Reset"
+    de: "⚠️ Zurücksetzen"
+    it: "⚠️ Reset"
+
+  reset_round:
+    en: "Start a new round"
+    de: "Neue Runde starten"
+    it: "Inizia un nuovo giro"
+
+  reset_round_info:
+    en: "Deletes all draws and wish lists, e.g. for next year's Secret Santa. Groups, people and their logins stay."
+    de: "Löscht alle Auslosungen und Wunschlisten, z. B. für das Wichteln im nächsten Jahr. Gruppen, Personen und ihre Zugangsdaten bleiben erhalten."
+    it: "Elimina tutte le estrazioni e le liste dei desideri, ad esempio per il Babbo Natale Segreto dell'anno prossimo. Gruppi, persone e i loro accessi restano."
+
+  reset_round_confirm:
+    en: "I understand, delete all draws and wish lists"
+    de: "Verstanden, alle Auslosungen und Wunschlisten löschen"
+    it: "Ho capito, elimina tutte le estrazioni e le liste dei desideri"
+
+  reset_round_done:
+    en: "New round started. Backup of the previous data:"
+    de: "Neue Runde gestartet. Sicherung der bisherigen Daten:"
+    it: "Nuovo giro iniziato. Backup dei dati precedenti:"
+
+  reset_all:
+    en: "Reset everything"
+    de: "Alles zurücksetzen"
+    it: "Resetta tutto"
+
+  reset_all_info:
+    en: "Deletes ALL data: the admin account, groups, people, draws and wish lists. The app restarts from the first-start setup. A backup of the database is saved in the data folder."
+    de: "Löscht ALLE Daten: das Admin-Konto, Gruppen, Personen, Auslosungen und Wunschlisten. Die App beginnt wieder mit der Ersteinrichtung. Eine Sicherung der Datenbank wird im Ordner data gespeichert."
+    it: "Elimina TUTTI i dati: l'account amministratore, gruppi, persone, estrazioni e liste dei desideri. L'app riparte dalla configurazione iniziale. Un backup del database viene salvato nella cartella data."
+
+  admin_password:
+    en: "Admin password"
+    de: "Admin-Passwort"
+    it: "Password dell'amministratore"
+
+  reset_all_confirm:
+    en: "I understand, delete all data"
+    de: "Verstanden, alle Daten löschen"
+    it: "Ho capito, elimina tutti i dati"
+
+  reset_all_not_confirmed:
+    en: "Tick the confirmation box to reset everything"
+    de: "Setze das Bestätigungshäkchen, um alles zurückzusetzen"
+    it: "Spunta la casella di conferma per resettare tutto"
+
+  wrong_password:
+    en: "Wrong password"
+    de: "Falsches Passwort"
+    it: "Password errata"
+
+  reset_all_done:
+    en: "All data deleted. Backup:"
+    de: "Alle Daten gelöscht. Sicherung:"
+    it: "Tutti i dati eliminati. Backup:"
+
+  # Personal page
+  your_groups:
+    en: "Your groups"
+    de: "Deine Gruppen"
+    it: "I tuoi gruppi"
+
+  not_in_any_group:
+    en: "You are not in any group yet. Ask the admin to add you to one!"
+    de: "Du bist noch in keiner Gruppe. Bitte den Admin, dich einer hinzuzufügen!"
+    it: "Non fai ancora parte di nessun gruppo. Chiedi all'amministratore di aggiungerti!"

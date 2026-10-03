@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   secret-santa:
     build:
@@ -9,8 +7,6 @@ services:
     ports:
       - "8501:8501"
     volumes:
-      # Mount config file so it can be edited without rebuilding
-      - ./.appconfig.yaml:/app/.appconfig.yaml
       # Mount a directory for the database to persist (not the file itself)
       - ./data:/app/data
       # Optional: Mount translations if you want to edit them
