@@ -1,268 +1,110 @@
 # Secret Santa Web Application (Vibe Coded)
 
-A multilingual web application for organizing Secret Santa gift exchanges with multiple groups, login authentication, and persistent storage. Built with Streamlit.
+A multilingual web app to organize Secret Santa gift exchanges for several families or friend groups at once. Built with Streamlit, stored in a small JSON database, and shipped as a Docker container.
 
 ## Features
 
-- **Multi-Language Support**: Interface available in English, German, and Italian with user-selectable language
-- **Multiple Groups**: Support for multiple families or friend groups in a single deployment
-- **User Authentication**: Secure login system with usernames and passwords
-- **Persistent Storage**: Assignments are automatically generated and stored in a database
-- **Exclusion Rules**: Configure who cannot be assigned to whom (e.g., couples)
-- **Budget Display**: Shows the gift budget for each group
-- **Wish Lists**: Users can create and manage their wish lists with support for links (Amazon, online shops, etc.). Each group has its own wish list, so people in several groups keep separate lists
-- **Private Assignment View**: Each user can only see their own Secret Santa assignment and their recipient's wish list
-- **Auto-generation**: Assignments are created once and persist across app restarts
+- **Admin console**: an admin account, created on the first start, manages groups and people, generates and shares their passwords, runs the draws and follows who still has to add their wishes
+- **Hidden results**: nobody sees the result of a draw, not even the admin, who can reveal it only if something needs checking
+- **Multiple groups**: one deployment serves several families or friend groups, each with its own budget, currency, draw and wish lists
+- **One login per person**: people in several groups (e.g. their own family and their partner's family) switch between their groups on their personal page
+- **Separate wish lists per group**: each Secret Santa only sees the wish list written for their group
+- **Exclusion rules**: partners (or anyone else) never draw each other, in every group they share
+- **Wish lists with links**: people add what they'd like to receive, including links to online shops
+- **Multi-language**: English, German and Italian, switchable at any time
+- **Reset with backup**: start a new round for next year, or reset everything; a backup of the database is saved first
 
-## Technologies
+## Quick Start (Docker)
 
-- **Streamlit**: Web application framework
-- **Poetry**: Dependency management
-- **TinyDB**: Lightweight JSON database for storing assignments and wish lists
-- **PyYAML**: Configuration file parsing
-- **Docker**: Containerization
-- **Dev Container**: Development environment
-
-## Getting Started
-
-### Prerequisites
-
-- Python 3.11+
-- Poetry (for local development)
-- Docker (for containerized deployment)
-- VS Code with Dev Containers extension (optional, for devcontainer)
-
-### Local Development
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/massimilianobotticelli/secret-santa.git
-   cd secret-santa
-   ```
-
-2. **Configure groups and participants**
-   
-   Edit `.appconfig.yaml` to add your groups with participants, usernames, passwords, and exclusion rules:
-   ```yaml
-   families:
-     - id: my_family
-       name: Smith Family
-       budget: 50
-       currency: "$"  # Currency symbol
-       participants:
-         - username: alice
-           password: secure123
-           name: Alice Smith
-           exclude: [bob]  # Alice cannot be assigned to Bob
-         
-         - username: bob
-           password: pass456
-           name: Bob Smith
-           exclude: [alice]  # Bob cannot be assigned to Alice
-   ```
-
-3. **Configure translations (optional)**
-   
-   The `translations.yaml` file contains all UI text in English, German, and Italian. You can add more languages or modify existing translations.
-
-4. **Install dependencies with Poetry**
-   ```bash
-   poetry install
-   ```
-
-5. **Run the application**
-   ```bash
-   poetry run streamlit run app.py
-   ```
-
-6. **Open your browser**
-   Navigate to `http://localhost:8501`, select your language and group, then login with any username/password from `.appconfig.yaml`
-
-### Docker Deployment
-
-#### Using Docker Compose (Recommended)
-
-1. **Create your configuration file**
-   ```bash
-   cp .appconfig.template.yaml .appconfig.yaml
-   # Edit .appconfig.yaml with your groups and participants
-   ```
-
-2. **Build and run the container**
-   ```bash
-   docker-compose up -d
-   ```
-   
-   The configuration files are mounted as volumes, so you can edit them without rebuilding:
-   - `.appconfig.yaml` - Edit groups and participants
-   - `translations.yaml` - Edit translations (optional)
-   - `data/` - Directory containing `secret_santa.db` (persists between restarts)
-
-3. **Edit configuration while running**
-   
-   You can modify `.appconfig.yaml` on your host machine at any time. The app will use the updated configuration on the next page refresh or restart:
-   ```bash
-   # Edit the config file
-   nano .appconfig.yaml
-   
-   # Restart the container to apply changes
-   docker-compose restart
-   ```
-
-4. **View logs**
-   ```bash
-   docker-compose logs -f
-   ```
-
-5. **Stop the container**
-   ```bash
-   docker-compose down
-   ```
-
-#### Using Docker directly
-
-1. **Build the Docker image**
-   ```bash
-   docker build -t secret-santa .
-   ```
-
-2. **Run the container with mounted config**
-   ```bash
-   docker run -p 8501:8501 \
-     -v $(pwd)/.appconfig.yaml:/app/.appconfig.yaml \
-     -v $(pwd)/data:/app/data \
-     -v $(pwd)/translations.yaml:/app/translations.yaml \
-     secret-santa
-   ```
-   
-   The `-v` flags mount local files/directories into the container:
-   - `.appconfig.yaml` - Configuration file (editable)
-   - `data/` - Directory for database persistence
-   - `translations.yaml` - Translations (editable)
-
-3. **Access the application**
-   Open `http://localhost:8501` in your browser
-
-### Development with VS Code Dev Container
-
-1. **Open the project in VS Code**
-   ```bash
-   code .
-   ```
-
-2. **Reopen in Container**
-   - Press `F1` or `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac)
-   - Select `Dev Containers: Reopen in Container`
-   - Wait for the container to build and start
-
-3. **Run the application**
-   The application will be available at `http://localhost:8501`
-
-## Project Structure
-
-```
-secret-santa/
-├── .devcontainer/
-│   └── devcontainer.json      # Dev container configuration
-├── app.py                      # Main Streamlit application
-├── wishes.py                   # Per-group wish list storage
-├── tests/                      # Pytest test suite
-├── .appconfig.yaml            # Groups and participants configuration
-├── translations.yaml          # Multi-language translations (EN, DE, IT)
-├── secret_santa.db            # TinyDB database (auto-generated, stores assignments & wishes)
-├── pyproject.toml             # Poetry dependencies and project metadata
-├── poetry.lock                # Locked dependency versions
-├── Dockerfile                 # Docker image definition
-├── docker-compose.yml         # Docker Compose configuration
-├── .gitignore                 # Git ignore rules
-└── README.md                  # This file
+```bash
+git clone https://github.com/massimilianobotticelli/vibed-santa.git
+cd vibed-santa
+docker compose up -d
 ```
 
-## How to Use the Application
+Open `http://localhost:8501` and:
 
-1. **Initial Setup**: 
-   - Configure groups (families or friend groups) in `.appconfig.yaml` with:
-     - Group ID, name, budget, and currency
-     - Participants with usernames, passwords, and names
-     - Exclusion rules (who cannot be assigned to whom)
-   - On first run, the app automatically generates Secret Santa assignments per group
+1. **Create the admin account** (the app asks for it on the first start)
+2. **People**: add everyone taking part. The username is created from the name and a password is generated, unless you type them. Set who doesn't exchange gifts with whom (e.g. partners)
+3. **Groups**: create the groups with their budget, currency and participants. A person can be in several groups with the same login
+4. **Share the logins**: each person has a ready-to-copy box with their username and password; *Show all logins* lists everyone at once
+5. **Draws**: once everyone is in, run the draw of each group. Participants can log in and fill their wish lists before and after the draw
 
-2. **Select Language**: Choose between English, German, or Italian using the language selector (EN | DE | IT)
+All data is stored in `data/secret_santa.db`, which is mounted as a volume and persists across restarts and rebuilds.
 
-3. **Select Group**: Choose your family or friend group from the dropdown
-
-4. **Login**: Enter your username and password
-
-5. **View Assignment**: After login, users see:
-   - The gift budget for their group (in the configured currency)
-   - Who they are Secret Santa for
-   - Their recipient's wish list (if any)
-   - Language switcher in the sidebar
-
-6. **Manage Wish List**: Users can:
-   - Add items they'd like to receive (including links to Amazon, online shops, etc.)
-   - Remove items from their wish list
-   - View what their Secret Santa will see
-
-7. **Persistence**: Assignments and wish lists are stored in `data/secret_santa.db` and persist across app restarts
-
-8. **Managing Groups**: 
-   - **Adding New Groups**: You can add new families/groups to `.appconfig.yaml` at any time
-     - The app will automatically detect and generate assignments for new groups
-     - Configuration is reloaded automatically (within 60 seconds or on page refresh)
-   - **Removing Groups**: If you remove a group from `.appconfig.yaml`
-     - The group's assignments are automatically deleted from the database
-     - This keeps the database clean and in sync with your configuration
-   - **Important**: Existing group assignments are NEVER modified - they remain unchanged
-   - To reset assignments for an existing group, delete the database file or remove and re-add the group
-
-## Configuration
-
-### Group Configuration (`.appconfig.yaml`)
-
-```yaml
-families:
-  - id: group_identifier          # Unique ID for the group
-    name: Display Name            # Name shown in the UI
-    budget: 50                    # Gift budget amount
-    currency: "$"                 # Currency symbol ($, €, £, ¥, etc.)
-    participants:
-      - username: user1           # Login username
-        password: pass1           # Login password
-        name: Display Name 1      # Full name shown in app
-        exclude: [user2]          # Optional: users they cannot be assigned to
-      
-      - username: user2
-        password: pass2
-        name: Display Name 2
-        exclude: [user1]
+```bash
+docker compose logs -f   # view logs
+docker compose down      # stop
 ```
 
-### Translations (`translations.yaml`)
+## Using the App
 
-The translations file uses a key-first structure for easy maintenance:
+### Participants
 
-```yaml
-translations:
-  key_name:
-    en: "English translation"
-    de: "German translation"
-    it: "Italian translation"
-```
+Participants log in on the *Participant* tab with their username and password and see:
 
-All UI text is translatable. To add a new language, add a new language code to each translation key.
+- the gift budget of their group
+- who they are Secret Santa for, and that person's wish list (once the draw has run)
+- their own wish list, to add and remove items
+- if they are in several groups, a switcher at the top of the page to move between them
+
+### Admin Console
+
+The admin logs in on the *Admin* tab. The console has four sections:
+
+- **Draws**: for each group, run the draw (results stay hidden), see who has not added any wishes yet, reveal the results with *Show results (spoiler!)* if needed, and redo the draw. A warning appears when participants were added or removed after the draw
+- **Groups**: create, edit and delete groups (name, budget, currency, participants). Deleting a group also deletes its draw and wish lists
+- **People**: add, edit and delete people, set exclusions and groups, see their login details and generate new passwords
+- **Reset**:
+  - *Start a new round* deletes all draws and wish lists (e.g. for next year) and keeps groups, people and logins
+  - *Reset everything* deletes all data, including the admin account, after confirming with the admin password
+
+  Before every reset, a backup is saved as `data/secret_santa.<timestamp>.bak.db`. To undo a reset, stop the app and copy the backup over `data/secret_santa.db`.
+
+### Exclusion Rules
+
+"Doesn't exchange gifts with" on a person works in both directions and applies in every group both people are in. Typical uses are couples and people living together.
+
+## Deployment
+
+The app listens on port `8501`. For a deployment reachable from the internet:
+
+- **Put it behind a reverse proxy with HTTPS** (e.g. Nginx Proxy Manager, Caddy, Traefik). Streamlit uses WebSockets, so the proxy must forward them (`Upgrade` / `Connection` headers)
+- **Create the admin account right after the first start**: until it exists, whoever opens the app can create it
+- **Back up the `data/` directory**: it contains the whole database
+
+### Upgrading from an Older Version
+
+Older versions read groups and people from `.appconfig.yaml`. To move an existing deployment to this version:
+
+1. Keep the existing `data/secret_santa.db`
+2. Copy the old `.appconfig.yaml` to `data/appconfig.yaml`
+3. Start the new version and create the admin account
+
+On the first start the configuration is imported (only into a database without groups and people, then the file is renamed to `data/appconfig.yaml.imported`), the old draws are converted and the old wish lists are assigned to the groups of each person. Use *Reset → Start a new round* to clear last year's draws and wish lists. See `.appconfig.template.yaml` for the format, which can also be used to create many groups at once.
+
+### Security Notes
+
+- People's passwords are stored in plain text in the database, so the admin can see and share them. Use generated passwords, not passwords people use elsewhere
+- The admin password is stored as a salted PBKDF2 hash
+- The `data/` directory and `.appconfig.yaml` are git-ignored; never commit them
 
 ## Development
 
-### Adding Dependencies
+### Local Development
+
+Requires Python 3.11+ and Poetry:
 
 ```bash
-poetry add <package-name>
+poetry install
+poetry run streamlit run app.py
 ```
+
+A VS Code Dev Container configuration is also available (`Dev Containers: Reopen in Container`).
 
 ### Running Tests
 
-Tests run in Docker via the `tests` service (it is only started on demand):
+Tests run in Docker via the `tests` service (only started on demand):
 
 ```bash
 docker compose run --rm --build tests
@@ -270,69 +112,48 @@ docker compose run --rm --build tests
 
 Or locally with Poetry: `poetry run pytest`
 
-### Adding a New Language
+### Project Structure
 
-1. Open `translations.yaml`
-2. Add your language code (e.g., `fr` for French) to each translation key:
-   ```yaml
-   title:
-     en: "🎅 Secret Santa"
-     de: "🎅 Wichteln"
-     it: "🎅 Babbo Natale Segreto"
-     fr: "🎅 Père Noël Secret"  # New language
-   ```
-3. Update the language selector buttons in `app.py` to include your new language
+```
+vibed-santa/
+├── app.py                      # Streamlit application (pages and admin console)
+├── admin.py                    # Admin account (hashed password)
+├── groups.py                   # Groups and people, YAML import
+├── draws.py                    # Secret Santa draws
+├── wishes.py                   # Wish lists, one per person and group
+├── reset.py                    # New round / reset everything, with backup
+├── translations.yaml           # UI texts (EN, DE, IT)
+├── tests/                      # Pytest test suite
+├── .appconfig.template.yaml    # Example configuration to import (optional)
+├── Dockerfile
+├── docker-compose.yml          # App service, and the "tests" service
+├── pyproject.toml / poetry.lock
+└── data/                       # Created at runtime: database, backups (git-ignored)
+```
 
 ### Database Structure
 
-The `secret_santa.db` file contains:
-- **assignments_[group_id]**: Tables for each group's Secret Santa assignments
-- **wishes**: Table storing wish lists, one per user and group (`family_id`, `username`, `items`). Wish lists saved before they were scoped per group are migrated automatically into every group the user belongs to
+`data/secret_santa.db` is a [TinyDB](https://tinydb.readthedocs.io/) JSON file with the tables:
 
-## Key Features Explained
+- **admin**: the admin account (`username`, `salt`, `password_hash`)
+- **people**: `username`, `name`, `password`, `exclude` (usernames)
+- **groups**: `id`, `name`, `budget`, `currency`, `members` (usernames)
+- **draws**: one per group: `family_id`, `drawn_at`, `assignments` (giver → receiver)
+- **wishes**: one per person and group: `family_id`, `username`, `items`
 
-### Exclusion Rules
+### Translations
 
-Exclusion rules prevent certain people from being assigned to each other. This is useful for:
-- Couples who shouldn't be assigned to each other
-- People who live together
-- Any other pairs where gift-giving would be awkward
+All UI texts are in `translations.yaml`, one entry per text with a translation per language:
 
-Example:
 ```yaml
-participants:
-  - username: alice
-    name: Alice
-    exclude: [bob, charlie]  # Alice won't be assigned to Bob or Charlie
+translations:
+  title:
+    en: "🎅 Secret Santa"
+    de: "🎅 Wichteln"
+    it: "🎅 Babbo Natale Segreto"
 ```
 
-### Multi-Group Support
-
-Each group operates independently:
-- Separate Secret Santa assignments
-- Separate budgets
-- Separate participant lists
-- Separate wish lists: someone participating in multiple groups (e.g. your family and your partner's family) keeps one wish list per group, visible only to their Secret Santa in that group
-
-### Language Selection
-
-- Users can change language at any time (login page and sidebar)
-- Language preference is stored in session state
-- All text updates immediately when language is changed
-
-## Dockerfile Details
-
-The Dockerfile includes all the important steps to run the application:
-
-1. **Base Image**: Uses Python 3.11 slim for a lightweight container
-2. **Environment Variables**: Sets up Python and Poetry configuration
-3. **System Dependencies**: Installs curl and build-essential for Poetry installation
-4. **Poetry Installation**: Installs Poetry for dependency management
-5. **Dependency Installation**: Uses Poetry to install Python dependencies
-6. **Application Copy**: Copies the Streamlit application code
-7. **Port Exposure**: Exposes port 8501 for Streamlit
-8. **Health Check**: Includes a health check endpoint
-9. **CMD**: Runs the Streamlit application
+To add a language, add its code to every entry and to `LANGUAGES` in `app.py`.
 
 ## License
 
@@ -341,4 +162,3 @@ MIT License - feel free to use this project for your Secret Santa events!
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
-

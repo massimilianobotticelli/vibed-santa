@@ -37,17 +37,8 @@ COPY pyproject.toml poetry.lock ./
 RUN poetry install --no-root --only main
 
 # Copy application code
-COPY app.py wishes.py .
+COPY *.py .
 COPY translations.yaml .
-
-# Copy configuration file if it exists, otherwise use template
-# The actual config should be mounted as a volume in production
-COPY .appconfig.yaml* ./
-RUN if [ ! -f .appconfig.yaml ]; then \
-    if [ -f .appconfig.template.yaml ]; then \
-        cp .appconfig.template.yaml .appconfig.yaml; \
-    fi; \
-    fi
 
 # Create data directory for database storage
 RUN mkdir -p /app/data
