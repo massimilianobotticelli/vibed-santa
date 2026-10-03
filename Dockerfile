@@ -37,7 +37,7 @@ COPY pyproject.toml poetry.lock ./
 RUN poetry install --no-root --only main
 
 # Copy application code
-COPY app.py .
+COPY app.py wishes.py .
 COPY translations.yaml .
 
 # Copy configuration file if it exists, otherwise use template

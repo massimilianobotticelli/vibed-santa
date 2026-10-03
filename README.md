@@ -10,7 +10,7 @@ A multilingual web application for organizing Secret Santa gift exchanges with m
 - **Persistent Storage**: Assignments are automatically generated and stored in a database
 - **Exclusion Rules**: Configure who cannot be assigned to whom (e.g., couples)
 - **Budget Display**: Shows the gift budget for each group
-- **Wish Lists**: Users can create and manage their wish lists with support for links (Amazon, online shops, etc.)
+- **Wish Lists**: Users can create and manage their wish lists with support for links (Amazon, online shops, etc.). Each group has its own wish list, so people in several groups keep separate lists
 - **Private Assignment View**: Each user can only see their own Secret Santa assignment and their recipient's wish list
 - **Auto-generation**: Assignments are created once and persist across app restarts
 
@@ -165,6 +165,8 @@ secret-santa/
 ├── .devcontainer/
 │   └── devcontainer.json      # Dev container configuration
 ├── app.py                      # Main Streamlit application
+├── wishes.py                   # Per-group wish list storage
+├── tests/                      # Pytest test suite
 ├── .appconfig.yaml            # Groups and participants configuration
 ├── translations.yaml          # Multi-language translations (EN, DE, IT)
 ├── secret_santa.db            # TinyDB database (auto-generated, stores assignments & wishes)
@@ -281,7 +283,7 @@ poetry run pytest
 
 The `secret_santa.db` file contains:
 - **assignments_[group_id]**: Tables for each group's Secret Santa assignments
-- **wishes**: Table storing wish lists for all users
+- **wishes**: Table storing wish lists, one per user and group (`family_id`, `username`, `items`). Wish lists saved before they were scoped per group are migrated automatically into every group the user belongs to
 
 ## Key Features Explained
 
@@ -306,7 +308,7 @@ Each group operates independently:
 - Separate Secret Santa assignments
 - Separate budgets
 - Separate participant lists
-- Wish lists are shared (visible across groups if someone participates in multiple)
+- Separate wish lists: someone participating in multiple groups (e.g. your family and your partner's family) keeps one wish list per group, visible only to their Secret Santa in that group
 
 ### Language Selection
 
