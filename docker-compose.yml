@@ -25,3 +25,13 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
+
+  # Test runner: docker compose run --rm --build tests
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    profiles: ["test"]
+    volumes:
+      - ./tests:/app/tests:ro
+    command: sh -c "poetry install --no-root --with dev -q && poetry run pytest -q"

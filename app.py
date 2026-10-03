@@ -3,8 +3,10 @@ import random
 import yaml
 import time
 from pathlib import Path
-from tinydb import TinyDB, Query
+from tinydb import TinyDB
 from typing import Dict, List, Optional
+
+import wishes
 
 # Timing utilities
 start_time = time.time()
@@ -210,25 +212,14 @@ def get_or_create_assignments(family: Dict) -> Dict[str, str]:
     return assignments
 
 
-def get_wish_list(username: str) -> List[str]:
-    """Get wish list for a user"""
-    db = get_db()
-    wishes_table = db.table("wishes")
-    User = Query()
-    result = wishes_table.get(User.username == username)
-    return result["items"] if result else []
+def get_wish_list(family_id: str, username: str) -> List[str]:
+    """Get wish list for a user within a specific family"""
+    return wishes.get_wish_list(get_db(), family_id, username)
 
 
-def save_wish_list(username: str, items: List[str]):
-    """Save wish list for a user"""
-    db = get_db()
-    wishes_table = db.table("wishes")
-    User = Query()
-
-    if wishes_table.get(User.username == username):
-        wishes_table.update({"items": items}, User.username == username)
-    else:
-        wishes_table.insert({"username": username, "items": items})
+def save_wish_list(family_id: str, username: str, items: List[str]):
+    """Save wish list for a user within a specific family"""
+    wishes.save_wish_list(get_db(), family_id, username, items)
 
 
 # Authentication
@@ -282,6 +273,11 @@ def initialize_all_families(config: Dict):
                 )
             except Exception as e:
                 print(f"ERROR: Could not remove family '{family_id}': {e}")
+
+    # Wish lists used to be shared across families; scope old ones per family
+    migrated = wishes.migrate_legacy_wishes(db, config)
+    if migrated:
+        log_timing(f"Migrated {migrated} legacy wish lists to per-family wish lists")
 
     # Close the database connection to ensure changes are persisted
     db.close()
@@ -490,7 +486,7 @@ else:
 
         # Display receiver's wish list
         st.subheader(f"{get_text(lang, 'wish_list')} {receiver['name']}")
-        receiver_wishes = get_wish_list(receiver_username)
+        receiver_wishes = get_wish_list(current_family["id"], receiver_username)
 
         if receiver_wishes:
             for i, item in enumerate(receiver_wishes, 1):
@@ -507,7 +503,7 @@ else:
     st.write(get_text(lang, "wish_list_info"))
 
     # Load current wish list
-    current_wishes = get_wish_list(st.session_state.username)
+    current_wishes = get_wish_list(current_family["id"], st.session_state.username)
 
     # Display current wishes
     if current_wishes:
@@ -519,7 +515,9 @@ else:
             with col2:
                 if st.button(get_text(lang, "remove"), key=f"remove_{i}"):
                     current_wishes.pop(i)
-                    save_wish_list(st.session_state.username, current_wishes)
+                    save_wish_list(
+                        current_family["id"], st.session_state.username, current_wishes
+                    )
                     st.rerun()
 
     # Add new wish
@@ -529,7 +527,9 @@ else:
 
         if add_button and new_wish:
             current_wishes.append(new_wish)
-            save_wish_list(st.session_state.username, current_wishes)
+            save_wish_list(
+                current_family["id"], st.session_state.username, current_wishes
+            )
             st.success(get_text(lang, "wish_added"))
             st.rerun()
 

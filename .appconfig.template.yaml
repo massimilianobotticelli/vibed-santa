@@ -107,7 +107,8 @@ families:
 # 2. Replace all example IDs, names, usernames, and passwords with real data
 # 3. Use STRONG passwords - these control access to Secret Santa assignments!
 # 4. Each group ID must be unique (e.g., smith_family, friends_2025, office_marketing)
-# 5. Usernames must be unique across ALL groups
+# 5. Usernames must be unique within a group. The same person can join several groups
+#    by using the same username in each; they get a separate wish list per group
 # 6. Ensure usernames in exclude lists match exactly with actual usernames
 # 7. You can add or remove groups and participants as needed
 # 8. The exclude list prevents awkward pairings (spouses, partners, siblings, roommates)
