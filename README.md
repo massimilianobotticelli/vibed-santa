@@ -262,9 +262,13 @@ poetry add <package-name>
 
 ### Running Tests
 
+Tests run in Docker via the `tests` service (it is only started on demand):
+
 ```bash
-poetry run pytest
+docker compose run --rm --build tests
 ```
+
+Or locally with Poetry: `poetry run pytest`
 
 ### Adding a New Language
 
